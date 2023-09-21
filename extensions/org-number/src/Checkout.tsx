@@ -23,7 +23,7 @@ interface OrgNumberSettings extends ExtensionSettings {
 export default reactExtension('purchase.checkout.block.render', () => <App />)
 
 function validateOrgNumber(value: string | undefined, settings: Partial<OrgNumberSettings>) {
-	const { required = true, validation = true } = settings
+	const { required = false, validation = false } = settings
 	if (!value) {
 		if (required) return 'org_required'
 		else return undefined
@@ -91,7 +91,7 @@ function App() {
 						namespace: metafieldNamespace,
 						key: metafieldKey,
 						valueType: 'string',
-						value: value.replace(/\s/g, '')
+						value: value.toString()
 					})
 				}}
 				value={orgNumber?.value.toString()}
