@@ -21,7 +21,6 @@ extensions/*/dist
 
 # lock files
 package-lock.json
-yarn.lock
 pnpm-lock.yaml
 
 # Yarn 3 files

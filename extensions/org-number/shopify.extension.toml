@@ -21,9 +21,17 @@ api_access = true
 network_access = false
 block_progress = true
 
-# [extensions.settings]
-#   [[extensions.settings.fields]]
-#   key = "banner_title"
-#   type = "single_line_text_field"
-#   name = "Banner title"
-#   description = "Enter a title for the banner"
+
+[extensions.settings]
+
+[[extensions.settings.fields]]
+key = "required"
+type = "boolean"
+name = "Required"
+description = "Whether the customer should be required to enter this field."
+
+[[extensions.settings.fields]]
+key = "validation"
+type = "boolean"
+name = "Validation"
+description = "Whether the org number's formatting will be checked."

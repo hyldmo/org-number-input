@@ -2,7 +2,7 @@ name: Deploy app
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   deploy:
     name: Deploy
@@ -18,8 +18,8 @@ jobs:
       - name: Install dependencies
         run: yarn --immutable
 
-      - run: format:check
-      - run: lint
+      - run: yarn format:check
+      - run: yarn lint
       - run: yarn build
 
       - name: Deploy
@@ -29,4 +29,4 @@ jobs:
           COMMIT_URL: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
           # .env content after a deploy
           SHOPIFY_API_KEY: xxxx
-        run: npm run deploy -- -f --source-control-url "$COMMIT_URL"
+        run: yarn deploy -f --source-control-url "$COMMIT_URL"
