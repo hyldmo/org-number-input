@@ -1,6 +1,10 @@
 {
-  "name": "monil-extensions",
-  "version": "1.0.0",
+  "name": "org-number-input",
+  "version": "0.0.0-development",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:hyldmo/shopify-org-number-input.git"
+  },
   "license": "UNLICENSED",
   "scripts": {
     "shopify": "shopify",
@@ -9,9 +13,11 @@
     "info": "shopify app info",
     "generate": "shopify app generate",
     "deploy": "shopify app deploy",
+    "release": "semantic-release",
     "lint": "eslint . --ignore-path .gitignore --resolve-plugins-relative-to .",
     "format": "prettier --write . --ignore-path .gitignore --config .prettierrc",
-    "format:check": "prettier --check . --ignore-path .gitignore  --config .prettierrc"
+    "format:check": "prettier --check . --ignore-path .gitignore  --config .prettierrc",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@shopify/app": "3.49.3",
@@ -24,9 +30,19 @@
   ],
   "packageManager": "yarn@3.6.3",
   "devDependencies": {
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
     "eslint": "^8.49.0",
     "eslint-config-auk": "^1.0.3",
+    "husky": "^8.0.3",
     "prettier": "^3.0.3",
+    "semantic-release": "^20.0.0",
     "typescript": "~5.1.0"
+  },
+  "commitlint": {
+    "parserPreset": "conventional-changelog-conventionalcommits",
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   }
 }

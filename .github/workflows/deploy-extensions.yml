@@ -8,11 +8,11 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
           cache: 'yarn'
 
       - name: Install dependencies
@@ -22,11 +22,22 @@ jobs:
       - run: yarn lint
       - run: yarn build
 
-      - name: Deploy
+      - name: Get version number
+        id: semver
+        run: ./scripts/semver.sh
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Deploy App
+        if: ${{ env.PUBLIC_VERSION != '' }}
         env:
           # Token from the Partner Dashboard
           SHOPIFY_CLI_PARTNERS_TOKEN: ${{ secrets.SHOPIFY_CLI_TOKEN }}
           COMMIT_URL: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
           # .env content after a deploy
           SHOPIFY_API_KEY: xxxx
-        run: yarn deploy -f --source-control-url "$COMMIT_URL"
+        run: yarn deploy -f --source-control-url "$COMMIT_URL" --version="$PUBLIC_VERSION"
+
+      - name: Create github release
+        if: ${{ env.PUBLIC_VERSION != '' }}
+        run: yarn release
