@@ -1,7 +1,7 @@
 {
   "name": "org-number-input",
   "version": "0.0.0-development",
-  "repository": "https://github.com/hyldmo/shopify-org-number-input.git",
+  "repository": "https://github.com/hyldmo/org-number-input.git",
   "license": "UNLICENSED",
   "scripts": {
     "shopify": "shopify",
