@@ -5,21 +5,35 @@ import {
 	useApplyMetafieldsChange,
 	useBuyerJourneyIntercept,
 	useMetafield,
+	useSettings,
 	useTranslate
 } from '@shopify/ui-extensions-react/checkout'
+import { ExtensionSettings } from '@shopify/ui-extensions/checkout'
 import { useState } from 'react'
+
+/**
+ * See shopify.extension.toml for source of options
+ */
+interface OrgNumberSettings extends ExtensionSettings {
+	required: boolean
+	validation: boolean
+}
 
 // Set the entry point for the extension
 export default reactExtension('purchase.checkout.block.render', () => <App />)
 
-function validateOrgNumber(value: string | undefined) {
-	if (!value) return 'org_required'
-	if (value.replace('MVA', '').match(/^([0-9]{3} ?){3}(MVA)?$/g)) return undefined
-	return 'org_invalid'
+function validateOrgNumber(value: string | undefined, settings: Partial<OrgNumberSettings>) {
+	if (!value) return settings.required ? 'org_required' : undefined
+	if (settings.validation) {
+		if (value.replace('MVA', '').match(/^([0-9]{3} ?){3}(MVA)?$/g)) return undefined
+		else return 'org_invalid'
+	}
+	return undefined
 }
 
 function App() {
 	// Define the metafield namespace and key
+	const settings = useSettings<OrgNumberSettings>()
 	const metafieldNamespace = 'adluna'
 	const metafieldKey = 'org_number'
 	const [validationError, setValidationError] = useState<string>()
@@ -34,7 +48,7 @@ function App() {
 	const applyMetafieldsChange = useApplyMetafieldsChange()
 
 	useBuyerJourneyIntercept(({ canBlockProgress }) => {
-		const error = validateOrgNumber(orgNumber?.value.toString())
+		const error = validateOrgNumber(orgNumber?.value.toString(), settings)
 		if (canBlockProgress && error) {
 			return {
 				behavior: 'block',
@@ -64,7 +78,7 @@ function App() {
 					setValidationError(undefined)
 				}}
 				onChange={(value) => {
-					const error = validateOrgNumber(value)
+					const error = validateOrgNumber(value, settings)
 					// Apply the change to the metafield
 					setValidationError(error ? t(error) : undefined)
 
