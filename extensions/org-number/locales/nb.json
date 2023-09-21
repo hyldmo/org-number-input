@@ -1,0 +1,5 @@
+{
+	"org_label": "Organisasjonsnummer",
+	"org_required": "Organisasjonsnummer er påkrevd",
+	"org_invalid": "Organisasjonsnummeret må inneholde akkurat 9 siffer"
+}

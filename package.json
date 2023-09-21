@@ -1,0 +1,31 @@
+{
+  "name": "monil-extensions",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "scripts": {
+    "shopify": "shopify",
+    "build": "shopify app build",
+    "dev": "shopify app dev",
+    "info": "shopify app info",
+    "generate": "shopify app generate",
+    "deploy": "shopify app deploy",
+    "lint": "eslint . --ignore-path .gitignore --resolve-plugins-relative-to .",
+    "format": "prettier --write . --ignore-path .gitignore --config .prettierrc",
+    "format:check": "prettier --check . --ignore-path .gitignore  --config .prettierrc"
+  },
+  "dependencies": {
+    "@shopify/app": "3.49.3",
+    "@shopify/cli": "3.49.3"
+  },
+  "author": "hyldmo",
+  "private": true,
+  "workspaces": [
+    "extensions/*"
+  ],
+  "packageManager": "yarn@3.6.3",
+  "devDependencies": {
+    "eslint": "^8.49.0",
+    "eslint-config-auk": "^1.0.3",
+    "prettier": "^3.0.3"
+  }
+}
