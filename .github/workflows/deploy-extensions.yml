@@ -28,16 +28,18 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
 
-      - name: Deploy App
-        if: ${{ env.PUBLIC_VERSION != '' }}
-        env:
-          # Token from the Partner Dashboard
-          SHOPIFY_CLI_PARTNERS_TOKEN: ${{ secrets.SHOPIFY_CLI_TOKEN }}
-          COMMIT_URL: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
-          # .env content after a deploy
-          SHOPIFY_API_KEY: xxxx
-        run: yarn deploy -f --source-control-url "$COMMIT_URL" --version="$PUBLIC_VERSION"
+      # - name: Deploy App
+      #   if: ${{ env.PUBLIC_VERSION != '' }}
+      #   env:
+      #     # Token from the Partner Dashboard
+      #     SHOPIFY_CLI_PARTNERS_TOKEN: ${{ secrets.SHOPIFY_CLI_TOKEN }}
+      #     COMMIT_URL: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
+      #     # .env content after a deploy
+      #     SHOPIFY_API_KEY: xxxx
+      #   run: yarn deploy -f --source-control-url "$COMMIT_URL" --version="$PUBLIC_VERSION"
 
       - name: Create github release
         if: ${{ env.PUBLIC_VERSION != '' }}
         run: yarn release
+        env:
+          GH_TOKEN: ${{ github.token }}
