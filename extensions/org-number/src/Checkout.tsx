@@ -23,8 +23,12 @@ interface OrgNumberSettings extends ExtensionSettings {
 export default reactExtension('purchase.checkout.block.render', () => <App />)
 
 function validateOrgNumber(value: string | undefined, settings: Partial<OrgNumberSettings>) {
-	if (!value) return settings.required ? 'org_required' : undefined
-	if (settings.validation) {
+	const { required = true, validation = true } = settings
+	if (!value) {
+		if (required) return 'org_required'
+		else return undefined
+	}
+	if (validation) {
 		if (value.replace('MVA', '').match(/^([0-9]{3} ?){3}(MVA)?$/g)) return undefined
 		else return 'org_invalid'
 	}
