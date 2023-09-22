@@ -8569,6 +8569,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"org-name@workspace:extensions/org-name":
+  version: 0.0.0-use.local
+  resolution: "org-name@workspace:extensions/org-name"
+  dependencies:
+    "@shopify/ui-extensions": 2023.7.x
+    "@shopify/ui-extensions-react": 2023.7.x
+    "@types/react": ^17.0.0
+    react: ^17.0.0
+  languageName: unknown
+  linkType: soft
+
 "org-number-input@workspace:.":
   version: 0.0.0-use.local
   resolution: "org-number-input@workspace:."

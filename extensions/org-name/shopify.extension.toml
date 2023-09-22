@@ -1,0 +1,31 @@
+# Learn more about configuring your checkout UI extension:
+# https://shopify.dev/api/checkout-extensions/checkout/configuration
+
+api_version = "2023-07"
+
+[[extensions]]
+name = "Organization Name"
+type = "ui_extension"
+handle = "org-name"
+
+[[extensions.targeting]]
+module = "./src/OrgName.tsx"
+target = "purchase.checkout.block.render"
+
+[[extensions.metafields]]
+namespace = "adluna"
+key = "org_name"
+
+[extensions.capabilities]
+api_access = true
+network_access = false
+block_progress = true
+
+
+[extensions.settings]
+
+[[extensions.settings.fields]]
+key = "required"
+type = "boolean"
+name = "Required"
+description = "Whether the customer should be required to enter this field."
