@@ -9,12 +9,16 @@ type = "ui_extension"
 handle = "org-number"
 
 [[extensions.targeting]]
-module = "./src/Checkout.tsx"
+module = "./src/OrgNumber.tsx"
 target = "purchase.checkout.block.render"
 
 [[extensions.metafields]]
 namespace = "adluna"
 key = "org_number"
+
+[[extensions.metafields]]
+namespace = "adluna"
+key = "org_name"
 
 [extensions.capabilities]
 api_access = true

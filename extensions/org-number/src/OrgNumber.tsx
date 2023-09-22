@@ -1,5 +1,4 @@
 import {
-	BlockStack,
 	reactExtension,
 	TextField,
 	useApplyMetafieldsChange,
@@ -103,6 +102,13 @@ function App() {
 					type: 'updateShippingAddress',
 					address: { company: res.data }
 				})
+				await applyMetafieldsChange({
+					type: 'updateMetafield',
+					namespace: metafieldNamespace,
+					key: 'org_name',
+					valueType: 'string',
+					value: res.data
+				})
 			}
 			setValidationError(undefined)
 			return {
@@ -112,30 +118,28 @@ function App() {
 	})
 
 	return (
-		<BlockStack>
-			<TextField
-				id={metafieldKey}
-				label={t('org_label')}
-				required
-				onInput={() => {
-					setValidationError(undefined)
-				}}
-				onChange={async (value) => {
-					const res = await validateOrgNumber(value, { ...settings, externalValidation: false })
-					// Apply the change to the metafield
-					setValidationError(res ? (typeof res === 'string' ? t(res) : res.error) : undefined)
+		<TextField
+			id={metafieldKey}
+			label={t('org_label')}
+			required
+			onInput={() => {
+				setValidationError(undefined)
+			}}
+			onChange={async (value) => {
+				const res = await validateOrgNumber(value, { ...settings, externalValidation: false })
+				// Apply the change to the metafield
+				setValidationError(res ? (typeof res === 'string' ? t(res) : res.error) : undefined)
 
-					applyMetafieldsChange({
-						type: 'updateMetafield',
-						namespace: metafieldNamespace,
-						key: metafieldKey,
-						valueType: 'string',
-						value: value.toString()
-					})
-				}}
-				value={orgNumber?.value.toString()}
-				error={validationError}
-			/>
-		</BlockStack>
+				applyMetafieldsChange({
+					type: 'updateMetafield',
+					namespace: metafieldNamespace,
+					key: metafieldKey,
+					valueType: 'string',
+					value: value.toString()
+				})
+			}}
+			value={orgNumber?.value.toString()}
+			error={validationError}
+		/>
 	)
 }
