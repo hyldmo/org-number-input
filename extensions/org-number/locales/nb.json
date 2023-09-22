@@ -1,5 +1,6 @@
 {
 	"org_label": "Organisasjonsnummer",
 	"org_required": "Organisasjonsnummer er påkrevd",
-	"org_invalid": "Organisasjonsnummeret må inneholde akkurat 9 siffer"
+	"org_invalid": "Organisasjonsnummeret må inneholde akkurat 9 siffer",
+	"org_not_found": "Ingen selskap med dette organisasjonsnummeret ble funnet"
 }

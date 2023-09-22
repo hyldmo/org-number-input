@@ -4,7 +4,7 @@
 api_version = "2023-07"
 
 [[extensions]]
-name = "org-number"
+name = "Organization Number"
 type = "ui_extension"
 handle = "org-number"
 
@@ -18,7 +18,7 @@ key = "org_number"
 
 [extensions.capabilities]
 api_access = true
-network_access = false
+network_access = true
 block_progress = true
 
 
@@ -35,3 +35,16 @@ key = "validation"
 type = "boolean"
 name = "Validation"
 description = "Whether the org number's formatting will be checked."
+
+[[extensions.settings.fields]]
+key = "externalValidation"
+type = "boolean"
+name = "External Validation"
+description = "If enabled, will validate org number with Brønnøysundregistrene's services."
+
+
+[[extensions.settings.fields]]
+key = "applyOrgName"
+type = "boolean"
+name = "Insert Organization Name"
+description = "If enabled, will insert the org name returned from the external validation into the company name field."

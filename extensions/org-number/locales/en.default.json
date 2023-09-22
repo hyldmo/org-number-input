@@ -1,5 +1,6 @@
 {
 	"org_label": "Organization Number",
 	"org_required": "Organization Number is required",
-	"org_invalid": "Organization Number is invalid"
+	"org_invalid": "Organization Number is invalid",
+	"org_not_found": "No organization found with this number"
 }
