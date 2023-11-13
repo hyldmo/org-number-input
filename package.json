@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@shopify/app": "3.49.3",
-    "@shopify/cli": "3.49.3"
+    "@shopify/cli": "^3.50.2"
   },
   "author": "hyldmo",
   "private": true,
